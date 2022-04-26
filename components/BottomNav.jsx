@@ -26,7 +26,7 @@ const BottomNav = () => {
             }}
         >
             <Tab.Screen
-                name='HomePage'
+                name='Home'
                 component={Home}
                 options={{
                     tabBarIcon: ({ color }) => (
