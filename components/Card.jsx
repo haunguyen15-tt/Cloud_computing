@@ -13,9 +13,12 @@ import COLORS from '../assets/data/colors';
 
 const width = Dimensions.get('screen').width / 2 - 30;
 
-const Card = ({ product }) => {
+const Card = ({ navigation, product }) => {
     return (
-        <TouchableOpacity>
+        <TouchableOpacity
+            activeOpacity={0.8}
+            onPress={() => navigation.navigate('Detail', product)}
+        >
             <View style={styles.card}>
                 <View style={{ alignItems: 'flex-end' }}>
                     <View

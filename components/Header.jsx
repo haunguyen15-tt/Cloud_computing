@@ -4,17 +4,17 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import CategoriesBar from '../components/CategoriesBar';
 import COLORS from '../assets/data/colors.js';
 
-const Header = () => {
+const Header = ({ navigation }) => {
     return (
         <SafeAreaView style={{ paddingHorizontal: 20 }}>
             <View style={styles.header}>
                 <View>
-                    <Text style={{ fontSize: 24, fontWeight: 'bold' }}>
+                    <Text style={{ fontSize: 20, fontWeight: 'bold' }}>
                         Welcome to
                     </Text>
                     <Text
                         style={{
-                            fontSize: 34,
+                            fontSize: 30,
                             fontWeight: 'bold',
                             color: COLORS.red,
                         }}
@@ -22,11 +22,15 @@ const Header = () => {
                         Demons Store
                     </Text>
                 </View>
-                <Icon name='shopping-cart' size={28} />
+                <Icon
+                    onPress={() => navigation.navigate('Cart')}
+                    name='shopping-cart'
+                    size={28}
+                />
             </View>
-            <View style={{ marginTop: 30, flexDirection: 'row' }}>
+            <View style={{ marginTop: 10, flexDirection: 'row' }}>
                 <View style={styles.searchContainer}>
-                    <Icon name='search' size={26} style={{ marginLeft: 20 }} />
+                    <Icon name='search' size={24} style={{ marginLeft: 20 }} />
                     <TextInput placeholder='Search' style={styles.input} />
                 </View>
                 <View style={styles.sortBtn}>

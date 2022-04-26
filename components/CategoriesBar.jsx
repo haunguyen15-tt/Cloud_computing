@@ -33,8 +33,8 @@ const CategoriesBar = () => {
 const styles = StyleSheet.create({
     categoryContainer: {
         flexDirection: 'row',
-        marginTop: 30,
-        marginBottom: 20,
+        marginTop: 14,
+        marginBottom: 14,
         justifyContent: 'space-between',
     },
     categoryText: { fontSize: 16, color: 'grey', fontWeight: 'bold' },
