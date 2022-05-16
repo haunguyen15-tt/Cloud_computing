@@ -1,5 +1,6 @@
 const express = require('express');
 const productController = require('../controller/productController');
+const authController = require('../controller/authController');
 
 const router = express.Router();
 
@@ -12,14 +13,9 @@ const router = express.Router();
 
 router
   .route('/top-5-cheap')
-  .get(
-    productController.getTop5Cheap,
-    productController.getAllProducts
-  );
+  .get(productController.getTop5Cheap, productController.getAllProducts);
 
-router
-  .route('/product-stats')
-  .get(productController.getProductStats);
+router.route('/product-stats').get(productController.getProductStats);
 // router
 //   .route('/monthly-plan/:year')
 //   .get(productController.getMonthlyPlan);
@@ -32,7 +28,11 @@ router
 router
   .route('/:id')
   .get(productController.getProduct)
-  .delete(productController.deleteProduct)
+  .delete(
+    authController.protect,
+    authController.restrictTo('admin'),
+    productController.deleteProduct
+  )
   .patch(productController.updateProduct);
 
 module.exports = router;

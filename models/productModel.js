@@ -4,10 +4,7 @@ const productSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: [
-        true,
-        'A product must have a name',
-      ],
+      required: [true, 'A product must have a name'],
       unique: true,
       trim: true,
     },
@@ -18,14 +15,8 @@ const productSchema = new mongoose.Schema(
     comment: [String],
     price: {
       type: Number,
-      required: [
-        true,
-        'A product must have a price',
-      ],
-      min: [
-        0,
-        'Product price must be a positive number',
-      ],
+      required: [true, 'A product must have a price'],
+      min: [0, 'Product price must be a positive number'],
     },
     category: {
       type: String,
@@ -37,10 +28,7 @@ const productSchema = new mongoose.Schema(
     },
     imageCover: {
       type: String,
-      required: [
-        true,
-        'A product must have a image',
-      ],
+      required: [true, 'A product must have a image'],
     },
   },
   {
@@ -59,9 +47,6 @@ const productSchema = new mongoose.Schema(
 //   next();
 // });
 
-const Product = mongoose.model(
-  'Product',
-  productSchema
-);
+const Product = mongoose.model('Product', productSchema);
 
 module.exports = Product;
