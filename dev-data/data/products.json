@@ -1,0 +1,42 @@
+[
+  {
+    "id": 0,
+    "name": "Tet Blazer",
+    "quantity": 50,
+    "comment": ["Good", "Not bad"],
+    "price": 500,
+    "category": "Blazer",
+    "description": "Ngoài trang phục truyền thống, biểu tượng thời trang Nhật còn có thể kể đến đồng phục học sinh - nét văn hoá đương đại được ra đời từ 150 năm trước.Mượn cảm hứng đặc biệt từ Gakuran (学ラン) - đồng phục của những chàng nam sinh Nhật Bản đầy nhiệt huyết và hoài bão, Zune.zx đã Việt hoá những tinh hoa ấy, kết tinh tại Yuuki Blazer - một trong những sản phẩm thuộc BST Linh vật ‘Nishikigoi’ vừa được ra mắt vào tháng 1 năm nay.Artwork linh vật ‘Koi’ được in ở ngay vị trí túi nơi mặt trước, là điểm nhấn truyền tải linh hồn cho chiếc blazer cổ đứng cùng các cúc áo thẳng dài mang nét đặc trưng của Gakuran.Đơn giản, dễ mặc, Yuuki Blazer sẽ đưa bạn đến thế giới học đường xứ hoa anh đào, nơi tuổi trẻ nổi loạn, cool ngầu và khác biệt.",
+    "imageCover": "tet-blazer"
+  },
+  {
+    "id": 1,
+    "name": "Tet Blazer1",
+    "quantity": 50,
+    "comment": ["Good", "Not bad"],
+    "price": 500,
+    "category": "Blazer",
+    "description": "Ngoài trang phục truyền thống, biểu tượng thời trang Nhật còn có thể kể đến đồng phục học sinh - nét văn hoá đương đại được ra đời từ 150 năm trước.Mượn cảm hứng đặc biệt từ Gakuran (学ラン) - đồng phục của những chàng nam sinh Nhật Bản đầy nhiệt huyết và hoài bão, Zune.zx đã Việt hoá những tinh hoa ấy, kết tinh tại Yuuki Blazer - một trong những sản phẩm thuộc BST Linh vật ‘Nishikigoi’ vừa được ra mắt vào tháng 1 năm nay.Artwork linh vật ‘Koi’ được in ở ngay vị trí túi nơi mặt trước, là điểm nhấn truyền tải linh hồn cho chiếc blazer cổ đứng cùng các cúc áo thẳng dài mang nét đặc trưng của Gakuran.Đơn giản, dễ mặc, Yuuki Blazer sẽ đưa bạn đến thế giới học đường xứ hoa anh đào, nơi tuổi trẻ nổi loạn, cool ngầu và khác biệt.",
+    "imageCover": "tet-blazer"
+  },
+  {
+    "id": 2,
+    "name": "Tet Blazer2",
+    "quantity": 50,
+    "comment": ["Good", "Not bad"],
+    "price": 500,
+    "category": "Blazer",
+    "description": "Ngoài trang phục truyền thống, biểu tượng thời trang Nhật còn có thể kể đến đồng phục học sinh - nét văn hoá đương đại được ra đời từ 150 năm trước.Mượn cảm hứng đặc biệt từ Gakuran (学ラン) - đồng phục của những chàng nam sinh Nhật Bản đầy nhiệt huyết và hoài bão, Zune.zx đã Việt hoá những tinh hoa ấy, kết tinh tại Yuuki Blazer - một trong những sản phẩm thuộc BST Linh vật ‘Nishikigoi’ vừa được ra mắt vào tháng 1 năm nay.Artwork linh vật ‘Koi’ được in ở ngay vị trí túi nơi mặt trước, là điểm nhấn truyền tải linh hồn cho chiếc blazer cổ đứng cùng các cúc áo thẳng dài mang nét đặc trưng của Gakuran.Đơn giản, dễ mặc, Yuuki Blazer sẽ đưa bạn đến thế giới học đường xứ hoa anh đào, nơi tuổi trẻ nổi loạn, cool ngầu và khác biệt.",
+    "imageCover": "tet-blazer"
+  },
+  {
+    "id": 3,
+    "name": "Tet Blazer3",
+    "quantity": 50,
+    "comment": ["Good", "Not bad"],
+    "price": 500,
+    "category": "Blazer",
+    "description": "Ngoài trang phục truyền thống, biểu tượng thời trang Nhật còn có thể kể đến đồng phục học sinh - nét văn hoá đương đại được ra đời từ 150 năm trước.Mượn cảm hứng đặc biệt từ Gakuran (学ラン) - đồng phục của những chàng nam sinh Nhật Bản đầy nhiệt huyết và hoài bão, Zune.zx đã Việt hoá những tinh hoa ấy, kết tinh tại Yuuki Blazer - một trong những sản phẩm thuộc BST Linh vật ‘Nishikigoi’ vừa được ra mắt vào tháng 1 năm nay.Artwork linh vật ‘Koi’ được in ở ngay vị trí túi nơi mặt trước, là điểm nhấn truyền tải linh hồn cho chiếc blazer cổ đứng cùng các cúc áo thẳng dài mang nét đặc trưng của Gakuran.Đơn giản, dễ mặc, Yuuki Blazer sẽ đưa bạn đến thế giới học đường xứ hoa anh đào, nơi tuổi trẻ nổi loạn, cool ngầu và khác biệt.",
+    "imageCover": "tet-blazer"
+  }
+]
