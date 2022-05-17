@@ -32,12 +32,7 @@ app.use('/api/v1/products', productRouter);
 app.use('/api/v1/users', userRouter);
 
 app.all('*', (req, res, next) => {
-  next(
-    new AppError(
-      `Can't find ${req.originalUrl} inn this server`,
-      404
-    )
-  );
+  next(new AppError(`Can't find ${req.originalUrl} inn this server`, 404));
 });
 
 app.use(globalErrorHandler);
