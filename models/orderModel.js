@@ -17,7 +17,7 @@ const orderSchema = new mongoose.Schema(
     ],
     // address: String,
     // numberPhone: String,
-    // totalAmount: Number,
+    totalAmount: Number,
   },
   {
     timestamps: true,
@@ -38,6 +38,10 @@ orderSchema.pre('save', async function (next) {
   });
 
   this.products = await Promise.all(productPromise);
+  this.totalAmount = this.products.reduce(
+    (total, item) => total + Math.round(item.totalAmount),
+    0
+  );
   next();
 });
 
