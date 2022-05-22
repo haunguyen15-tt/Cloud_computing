@@ -8,4 +8,6 @@ router
   .post(orderController.addNewOrder)
   .get(orderController.getAllOrders);
 
+router.route('/:id').get(orderController.getOrdersByUser);
+
 module.exports = router;
