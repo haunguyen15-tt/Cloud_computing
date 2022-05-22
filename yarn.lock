@@ -907,6 +907,11 @@
   "resolved" "https://registry.npmjs.org/etag/-/etag-1.8.1.tgz"
   "version" "1.8.1"
 
+"express-mongo-sanitize@^2.2.0":
+  "integrity" "sha512-PZBs5nwhD6ek9ZuP+W2xmpvcrHwXZxD5GdieX2dsjPbAbH4azOkrHbycBud2QRU+YQF1CT+pki/lZGedHgo/dQ=="
+  "resolved" "https://registry.npmjs.org/express-mongo-sanitize/-/express-mongo-sanitize-2.2.0.tgz"
+  "version" "2.2.0"
+
 "express-rate-limit@^6.4.0":
   "integrity" "sha512-lxQRZI4gi3qAWTf0/Uqsyugsz57h8bd7QyllXBgJvd6DJKokzW7C5DTaNvwzvAQzwHGFaItybfYGhC8gpu0V2A=="
   "resolved" "https://registry.npmjs.org/express-rate-limit/-/express-rate-limit-6.4.0.tgz"
@@ -1184,6 +1189,14 @@
   "version" "1.0.3"
   dependencies:
     "function-bind" "^1.1.1"
+
+"hpp@^0.2.3":
+  "integrity" "sha512-4zDZypjQcxK/8pfFNR7jaON7zEUpXZxz4viyFmqjb3kWNWAHsLEUmWXcdn25c5l76ISvnD6hbOGO97cXUI3Ryw=="
+  "resolved" "https://registry.npmjs.org/hpp/-/hpp-0.2.3.tgz"
+  "version" "0.2.3"
+  dependencies:
+    "lodash" "^4.17.12"
+    "type-is" "^1.6.12"
 
 "http-cache-semantics@^4.0.0":
   "integrity" "sha512-carPklcUh7ROWRK7Cv27RPtdhYhUsela/ue5/jKzjegVvXDqM2ILE9Q2BGn9JZJh1g87cp56su/FgQSzcWS8cQ=="
@@ -1595,6 +1608,11 @@
   "integrity" "sha1-DdOXEhPHxW34gJd9UEyI+0cal6w="
   "resolved" "https://registry.npmjs.org/lodash.once/-/lodash.once-4.1.1.tgz"
   "version" "4.1.1"
+
+"lodash@^4.17.12":
+  "integrity" "sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg=="
+  "resolved" "https://registry.npmjs.org/lodash/-/lodash-4.17.21.tgz"
+  "version" "4.17.21"
 
 "loose-envify@^1.4.0":
   "integrity" "sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q=="
@@ -2501,7 +2519,7 @@
   "resolved" "https://registry.npmjs.org/type-fest/-/type-fest-0.20.2.tgz"
   "version" "0.20.2"
 
-"type-is@~1.6.18":
+"type-is@^1.6.12", "type-is@~1.6.18":
   "integrity" "sha512-TkRKr9sUTxEH8MdfuCSP7VizJyzRNMjj2J2do2Jr3Kym598JVdEksuzPQCnlFPW4ky9Q+iA+ma9BGm06XQBy8g=="
   "resolved" "https://registry.npmjs.org/type-is/-/type-is-1.6.18.tgz"
   "version" "1.6.18"
@@ -2660,6 +2678,18 @@
   "integrity" "sha512-PSNhEJDejZYV7h50BohL09Er9VaIefr2LMAf3OEmpCkjOi34eYyQYAXUTjEQtZJTKcF0E2UKTh+osDLsgNim9Q=="
   "resolved" "https://registry.npmjs.org/xdg-basedir/-/xdg-basedir-4.0.0.tgz"
   "version" "4.0.0"
+
+"xss-clean@^0.1.1":
+  "integrity" "sha1-07poTYXM1SBUlj0BrWqzbWYtsaU="
+  "resolved" "https://registry.npmjs.org/xss-clean/-/xss-clean-0.1.1.tgz"
+  "version" "0.1.1"
+  dependencies:
+    "xss-filters" "1.2.6"
+
+"xss-filters@1.2.6":
+  "integrity" "sha1-aLOQicsd/4udvIiUhIObL1B/XFU="
+  "resolved" "https://registry.npmjs.org/xss-filters/-/xss-filters-1.2.6.tgz"
+  "version" "1.2.6"
 
 "yallist@^4.0.0":
   "integrity" "sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A=="
