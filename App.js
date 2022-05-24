@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StatusBar } from 'react-native';
+import { View, StatusBar, FlatList } from 'react-native';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -13,13 +13,15 @@ import COLORS from './assets/data/colors';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-    return (
-        <NavigationContainer>
-            <StatusBar barStyle='dark-content' backgroundColor={COLORS.white} />
-            <Stack.Navigator screenOptions={{ headerShown: false }}>
-                <Stack.Screen name='HomePage' component={BottomNav} />
-                <Stack.Screen name='Detail' component={Detail} />
-            </Stack.Navigator>
-        </NavigationContainer>
-    );
+  return (
+    <>
+      <NavigationContainer>
+        <StatusBar barStyle='dark-content' backgroundColor={COLORS.white} />
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name='HomePage' component={BottomNav} />
+          <Stack.Screen name='Detail' component={Detail} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </>
+  );
 }
