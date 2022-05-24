@@ -20,7 +20,7 @@ const Profile = () => {
   }, []);
 
   return (
-    <View style={{ flex: 1, padding: 24 }}>
+    <View style={{ flex: 1, padding: 26 }}>
       {
         <FlatList
           data={data}
