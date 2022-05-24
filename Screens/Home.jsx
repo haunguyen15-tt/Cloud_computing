@@ -25,11 +25,7 @@ const Home = ({ navigation }) => {
         numColumns={2}
         data={products}
         renderItem={({ item }) => (
-          <Card
-            product={item}
-            navigation={navigation}
-            keyExtractor={(item) => item.id}
-          />
+          <Card product={item} navigation={navigation} keyExtractor={(item) => item.id} />
         )}
       />
     </>
