@@ -114,6 +114,7 @@ const styles = StyleSheet.create({
     height: 50,
     alignItems: 'center',
     paddingHorizontal: 20,
+    marginBottom: 100,
   },
   totalPriceText: {
     fontSize: 20,
@@ -124,7 +125,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 18,
     color: '#fff',
-    marginLeft: 100,
+    marginLeft: 150,
     backgroundColor: '#B22222',
     padding: 10,
     borderRadius: 10,

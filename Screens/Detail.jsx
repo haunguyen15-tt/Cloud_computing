@@ -1,12 +1,5 @@
 import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  SafeAreaView,
-  Image,
-  StyleSheet,
-  ScrollView,
-} from 'react-native';
+import { View, Text, TouchableOpacity, Image, StyleSheet, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import COLORS from '../assets/data/colors';
@@ -30,8 +23,10 @@ function Detail({ navigation, route }) {
       </View>
       <View style={style.imageContainer}>
         <Image
-          source={product.img}
-          style={{ resizeMode: 'contain', flex: 1, width: '50%' }}
+          source={{
+            uri: product.imageCover ? product.imageCover : 'assets/product1.png',
+          }}
+          style={{ resizeMode: 'cover', flex: 1, width: '100%' }}
         />
       </View>
       <View style={style.detailsContainer}>
@@ -54,9 +49,7 @@ function Detail({ navigation, route }) {
             alignItems: 'center',
           }}
         >
-          <Text style={{ fontSize: 22, fontWeight: 'bold' }}>
-            {product.name}
-          </Text>
+          <Text style={{ fontSize: 22, fontWeight: 'bold' }}>{product.name}</Text>
           <View style={style.priceTag}>
             <Text
               style={{
@@ -96,16 +89,12 @@ function Detail({ navigation, route }) {
                 alignItems: 'center',
               }}
             >
-              <View style={style.borderBtn}>
-                <Text
-                  onPress={() =>
-                    quantity > 0 && setQuantity((prev) => prev - 1)
-                  }
-                  style={style.borderBtnText}
-                >
-                  -
-                </Text>
-              </View>
+              <TouchableOpacity
+                style={style.borderBtn}
+                onPress={() => quantity > 0 && setQuantity((prev) => prev - 1)}
+              >
+                <Text style={style.borderBtnText}>-</Text>
+              </TouchableOpacity>
               <Text
                 style={{
                   fontSize: 20,
@@ -115,14 +104,12 @@ function Detail({ navigation, route }) {
               >
                 {quantity}
               </Text>
-              <View style={style.borderBtn}>
-                <Text
-                  onPress={() => setQuantity((prev) => prev + 1)}
-                  style={style.borderBtnText}
-                >
-                  +
-                </Text>
-              </View>
+              <TouchableOpacity
+                onPress={() => setQuantity((prev) => prev + 1)}
+                style={style.borderBtn}
+              >
+                <Text style={style.borderBtnText}>+</Text>
+              </TouchableOpacity>
             </View>
 
             <View style={style.buyBtn}>

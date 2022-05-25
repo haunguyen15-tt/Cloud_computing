@@ -8,10 +8,15 @@ const width = Dimensions.get('screen').width / 2 - 30;
 
 const Card = ({ navigation, product }) => {
   return (
-    <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.navigate('Detail', product)}>
+    <TouchableOpacity
+      activeOpacity={0.8}
+      onPress={(e) => {
+        navigation.navigate('Detail', product);
+      }}
+    >
       <View style={styles.card}>
         <View style={{ alignItems: 'flex-end' }}>
-          <View
+          {/* <TouchableOpacity
             style={{
               width: 30,
               height: 30,
@@ -19,20 +24,28 @@ const Card = ({ navigation, product }) => {
               alignItems: 'center',
               justifyContent: 'center',
               backgroundColor: product.like ? 'rgba(245, 42, 42,0.2)' : 'rgba(0,0,0,0.2)',
+              elevation: 100,
+            }}
+            onPress={(e) => {
+              if (!e.preventDefault) {
+                console.log('Tim');
+              }
             }}
           >
             <Icon name='favorite' size={18} color={product.like ? COLORS.red : COLORS.dark} />
-          </View>
+          </TouchableOpacity> */}
         </View>
         <View style={styles.imageWrapper}>
           <Image
             style={{
               flex: 1,
-              width: 120,
+              width: 150,
               resizeMode: 'cover',
               marginTop: -30,
             }}
-            source={product.img}
+            source={{
+              uri: product.imageCover ? product.imageCover : 'assets/product1.png',
+            }}
           />
         </View>
         <Text style={{ fontWeight: 'bold', fontSize: 17, marginTop: 10 }}>{product.name}</Text>
@@ -44,7 +57,7 @@ const Card = ({ navigation, product }) => {
           }}
         >
           <Text style={{ fontSize: 16, fontWeight: 'bold' }}>${product.price}</Text>
-          <View
+          <TouchableOpacity
             style={{
               height: 30,
               width: 30,
@@ -53,6 +66,7 @@ const Card = ({ navigation, product }) => {
               justifyContent: 'center',
               alignItems: 'center',
             }}
+            onPress={() => console.log('Press')}
           >
             <Text
               style={{
@@ -63,7 +77,7 @@ const Card = ({ navigation, product }) => {
             >
               +
             </Text>
-          </View>
+          </TouchableOpacity>
         </View>
       </View>
     </TouchableOpacity>

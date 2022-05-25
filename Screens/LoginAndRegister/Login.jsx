@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import Toast from 'react-native-toast-message';
 import {
   Text,
   StyleSheet,
@@ -10,11 +11,34 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Icon from '../../assets/logo.png';
+import { useSelector, useDispatch } from 'react-redux';
+import { login } from '../../Redux/actions/authActions';
 
 function Login({ navigation }) {
   const navigateToRegister = () => {
     navigation.navigate('Register');
   };
+
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSubmit = () => {
+    dispatch(login(email, password));
+  };
+
+  useEffect(() => {
+    if (auth.error) {
+      Toast.show({
+        type: 'error',
+        text1: auth.error,
+      });
+    } else if (auth.user) {
+      navigation.navigate('Profile');
+    }
+  }, [auth.error, auth.user]);
 
   return (
     <View style={styles.mainView}>
@@ -28,14 +52,18 @@ function Login({ navigation }) {
             placeholder={'Email Address'}
             placeholderTextColor={'#fff'}
             style={styles.TextInput}
+            value={email}
+            onChangeText={(text) => setEmail(text.toLowerCase())}
           />
           <TextInput
             placeholder={'Password'}
             placeholderTextColor={'#fff'}
             style={styles.TextInput}
             secureTextEntry={true}
+            value={password}
+            onChangeText={(text) => setPassword(text.toLowerCase())}
           />
-          <TouchableOpacity style={styles.Button}>
+          <TouchableOpacity style={styles.Button} onPress={() => handleSubmit()}>
             <Text style={styles.ButtonText}>Login</Text>
           </TouchableOpacity>
         </ScrollView>

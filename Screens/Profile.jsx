@@ -1,13 +1,26 @@
 import React from 'react';
 import { View, FlatList, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import OrderItem from '../components/OrderItem';
 import Login from '../Screens/LoginAndRegister/Login';
 import Register from '../Screens/LoginAndRegister/Register';
 import * as ImagePicker from 'expo-image-picker';
+import { useSelector, useDispatch } from 'react-redux';
 
-const user = { name: 'John', email: 'test' };
+const OrderItems = [
+  {
+    product: [
+      { id: 1, name: 'T-shirt', quantity: 1 },
+      { id: 2, name: 'T-shirt', quantity: 1 },
+      { id: 3, name: 'T-shirt', quantity: 1 },
+    ],
+  },
+];
 
 const Profile = ({ navigation }) => {
+  const user = useSelector((state) => state.auth.user);
+  const dispatch = useDispatch();
+
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -23,6 +36,11 @@ const Profile = ({ navigation }) => {
       console.log(name);
     }
   };
+
+  const hanldeLogout = () => {
+    dispatch({ type: 'LOG_OUT' });
+  };
+
   return (
     <View style={{ flex: 1, backgroundColor: '#fff' }}>
       {user ? (
@@ -31,10 +49,17 @@ const Profile = ({ navigation }) => {
           <View style={styles.contentBot}>
             <View style={styles.botContent}>
               <View style={styles.header}>
-                <Text style={styles.headerText}>Hau Nguyen</Text>
+                <Text style={styles.headerText}>{user.name}</Text>
+                <Text style={{ fontSize: 12, fontWeight: 'bold' }}>
+                  Number Phone: {user.numberPhone}
+                </Text>
+                <Text style={{ fontSize: 12, fontWeight: 'bold' }}>Address: {user.address}</Text>
+              </View>
+              <View style={styles.userOrder}>
+                <Text>Order1231</Text>
+                <Text onPress={hanldeLogout}>Logout</Text>
               </View>
             </View>
-            <View style={styles.userInfo}></View>
           </View>
           <View style={styles.avatarWrapped}>
             <Image source={require('../assets/avatar2.jpg')} style={styles.avatar} />
@@ -77,14 +102,16 @@ const styles = StyleSheet.create({
   },
   botContent: {
     width: '100%',
-    backgroundColor: 'red',
     height: '100%',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
   },
   header: {
-    marginTop: -340,
+    marginTop: -520,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   headerText: {
     fontSize: 20,
@@ -120,6 +147,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#000',
     padding: 2,
     borderRadius: 10,
+  },
+  userOrder: {
+    width: '100%',
+    backgroundColor: 'red',
   },
 });
 

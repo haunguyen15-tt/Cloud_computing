@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, SafeAreaView, StyleSheet, TextInput } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import CategoriesBar from '../components/CategoriesBar';
