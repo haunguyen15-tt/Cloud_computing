@@ -19,8 +19,8 @@ const productSchema = new mongoose.Schema(
       min: [0, 'Product price must be a positive number'],
     },
     category: {
-      type: String,
-      default: 'All',
+      type: mongoose.Schema.ObjectId,
+      ref: 'Category',
     },
     description: {
       type: String,
@@ -29,12 +29,22 @@ const productSchema = new mongoose.Schema(
     imageCover: {
       type: String,
       required: [true, 'A product must have a image'],
+      default: 'default.jpg',
     },
   },
   {
     timestamps: true,
   }
 );
+
+productSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: 'category',
+    select: 'name',
+  });
+
+  next();
+});
 
 // DOCUMENT MIDDLEWARE: run before .save() and .create()
 // productSchema.pre('save', function () {

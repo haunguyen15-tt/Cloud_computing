@@ -13,11 +13,17 @@ const orderSchema = new mongoose.Schema(
         name: String,
         quantity: Number,
         totalAmount: Number,
+        imageCover: String,
       },
     ],
     // address: String,
     // numberPhone: String,
     totalAmount: Number,
+    status: {
+      type: String,
+      enum: ['pending', 'confirmed', 'delivered'],
+      default: 'pending',
+    },
   },
   {
     timestamps: true,
@@ -34,6 +40,7 @@ orderSchema.pre('save', async function (next) {
       name: product.name,
       quantity: item.quantity,
       totalAmount: totalAmount,
+      imageCover: product.imageCover,
     };
   });
 

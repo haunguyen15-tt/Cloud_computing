@@ -45,6 +45,14 @@ const userSchema = new mongoose.Schema({
     default: true,
     select: false,
   },
+  numberPhone: {
+    type: String,
+    required: [true, 'Please enter a phone number'],
+  },
+  address: {
+    type: String,
+    required: [true, 'Please enter address'],
+  },
 });
 
 userSchema.pre('save', async function (next) {

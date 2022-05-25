@@ -23,7 +23,7 @@ router.route('/product-stats').get(productController.getProductStats);
 router
   .route('/')
   .get(productController.getAllProducts)
-  .post(productController.addNewProduct);
+  .post(productController.uploadImageCover, productController.addNewProduct);
 
 router
   .route('/:id')
