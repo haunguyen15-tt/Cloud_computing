@@ -1,12 +1,21 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { useDispatch } from 'react-redux';
+import { ADD_TO_CART } from '../Redux/constants';
 
 import COLORS from '../assets/data/colors';
 
 const width = Dimensions.get('screen').width / 2 - 30;
 
 const Card = ({ navigation, product }) => {
+  const dispatch = useDispatch();
+
+  const handleAddItemToCart = (product) => {
+    dispatch({ type: ADD_TO_CART, payload: product });
+    console.log(product);
+  };
+
   return (
     <TouchableOpacity
       activeOpacity={0.8}
@@ -15,26 +24,6 @@ const Card = ({ navigation, product }) => {
       }}
     >
       <View style={styles.card}>
-        <View style={{ alignItems: 'flex-end' }}>
-          {/* <TouchableOpacity
-            style={{
-              width: 30,
-              height: 30,
-              borderRadius: 15,
-              alignItems: 'center',
-              justifyContent: 'center',
-              backgroundColor: product.like ? 'rgba(245, 42, 42,0.2)' : 'rgba(0,0,0,0.2)',
-              elevation: 100,
-            }}
-            onPress={(e) => {
-              if (!e.preventDefault) {
-                console.log('Tim');
-              }
-            }}
-          >
-            <Icon name='favorite' size={18} color={product.like ? COLORS.red : COLORS.dark} />
-          </TouchableOpacity> */}
-        </View>
         <View style={styles.imageWrapper}>
           <Image
             style={{
@@ -57,27 +46,48 @@ const Card = ({ navigation, product }) => {
           }}
         >
           <Text style={{ fontSize: 16, fontWeight: 'bold' }}>${product.price}</Text>
-          <TouchableOpacity
-            style={{
-              height: 30,
-              width: 30,
-              backgroundColor: COLORS.red,
-              borderRadius: 5,
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-            onPress={() => console.log('Press')}
-          >
-            <Text
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+            <TouchableOpacity
               style={{
-                fontSize: 20,
-                color: COLORS.white,
-                fontWeight: 'bold',
+                height: 30,
+                width: 30,
+                backgroundColor: COLORS.red,
+                borderRadius: 5,
+                justifyContent: 'center',
+                alignItems: 'center',
+                marginRight: 5,
+              }}
+              onPress={() => handleAddItemToCart(product)}
+            >
+              <Text
+                style={{
+                  fontSize: 20,
+                  color: COLORS.white,
+                  fontWeight: 'bold',
+                }}
+              >
+                +
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                width: 30,
+                height: 30,
+                borderRadius: 15,
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor: product.like ? 'rgba(245, 42, 42,0.2)' : 'rgba(0,0,0,0.2)',
+                elevation: 100,
+              }}
+              onPress={(e) => {
+                if (!e.preventDefault) {
+                  console.log('Tim');
+                }
               }}
             >
-              +
-            </Text>
-          </TouchableOpacity>
+              <Icon name='favorite' size={18} color={product.like ? COLORS.red : COLORS.dark} />
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </TouchableOpacity>

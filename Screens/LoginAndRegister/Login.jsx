@@ -36,7 +36,7 @@ function Login({ navigation }) {
         text1: auth.error,
       });
     } else if (auth.user) {
-      navigation.navigate('Profile');
+      navigation.goBack();
     }
   }, [auth.error, auth.user]);
 

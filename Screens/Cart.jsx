@@ -1,11 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text, Image, FlatList, TouchableOpacity, StyleSheet, View } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { INCREASE_QUANTITY, DECREASE_QUANTITY, GET_TOTAL_AMOUNT } from '../Redux/constants';
+import { useFocusEffect } from '@react-navigation/native';
 import { CART_DUMMY_PRODUCTS } from '../assets/data/cartProducts';
 
 function Cart({ navigation }) {
-  const [products, setProducts] = useState(CART_DUMMY_PRODUCTS);
+  const products = useSelector((state) => state.cart.items);
+  // const [totalAmount, setTotalAmount] = useState(0);
+
+  // useFocusEffect(
+  //   React.useCallback(() => {
+  //     setTotalAmount(totalPrice);
+  //     return () => setTotalAmount(0);
+  //   })
+  // );
+
   return (
     <>
       <View
@@ -24,20 +35,24 @@ function Cart({ navigation }) {
           }}
         />
       </View>
-      <FlatList
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{
-          marginTop: 10,
-          paddingBottom: 20,
-        }}
-        numColumns={1}
-        data={products}
-        renderItem={({ item }) => <CartItem product={item} keyExtractor={(item) => item.id} />}
-      />
+      {products.length > 0 && (
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{
+            marginTop: 10,
+            paddingBottom: 20,
+          }}
+          numColumns={1}
+          data={products}
+          renderItem={({ item }) => <CartItem product={item} />}
+          keyExtractor={(item) => item._id}
+        />
+      )}
       <View style={styles.totalPrice}>
         <Text style={styles.totalPriceText}>Total:</Text>
-        <Text style={styles.totalPriceText}>599$</Text>
-        <TouchableOpacity onPress={() => navigation.navigate('Checkout')}>
+        {/* <Text style={styles.totalPriceText}>${totalAmount}</Text> */}
+        <TotalAmount />
+        <TouchableOpacity onPress={() => navigation.navigate('Checkout', products)}>
           <Text style={styles.checkoutBtn}>Checkout</Text>
         </TouchableOpacity>
       </View>
@@ -46,12 +61,37 @@ function Cart({ navigation }) {
 }
 
 const CartItem = ({ product }) => {
+  let products = useSelector((state) => state.cart.items);
+  const product1 = products.find((item) => item._id === product._id);
   const [quantity, setQuantity] = useState(1);
+  const dispatch = useDispatch();
+
+  useFocusEffect(
+    React.useCallback(() => {
+      setQuantity(product1.quantity);
+      return () => setQuantity(1);
+    }, [])
+  );
+
+  const handleIncreaseQuantity = () => {
+    dispatch({ type: INCREASE_QUANTITY, payload: product1 });
+    console.log(quantity);
+  };
+  const handleDecreaseQuantity = () => {
+    dispatch({ type: DECREASE_QUANTITY, payload: product1 });
+    setQuantity((prev) => prev - 1);
+    dispatch({ type: GET_TOTAL_AMOUNT });
+  };
 
   return (
     <View style={styles.container}>
       <View style={styles.imgWrapped}>
-        <Image source={product.img} style={styles.img} />
+        <Image
+          source={{
+            uri: product.imageCover ? product.imageCover : 'assets/product1.png',
+          }}
+          style={styles.img}
+        />
       </View>
       <View style={styles.productInfo}>
         <View>
@@ -63,14 +103,20 @@ const CartItem = ({ product }) => {
         <View style={styles.productQuantityWrapped}>
           <TouchableOpacity
             style={styles.borderBtn}
-            onPress={() => quantity > 0 && setQuantity((prev) => prev - 1)}
+            onPress={() => {
+              quantity > 0 && handleDecreaseQuantity();
+            }}
           >
             <Text style={styles.borderBtnText}>-</Text>
           </TouchableOpacity>
           <Text style={styles.productQuantity}>{quantity}</Text>
           <TouchableOpacity
             style={styles.borderBtn}
-            onPress={() => setQuantity((prev) => prev + 1)}
+            onPress={() => {
+              handleIncreaseQuantity();
+              setQuantity((prev) => prev + 1);
+              dispatch({ type: GET_TOTAL_AMOUNT });
+            }}
           >
             <Text style={styles.borderBtnText}>+</Text>
           </TouchableOpacity>
@@ -90,6 +136,21 @@ const CartItem = ({ product }) => {
       </TouchableOpacity>
     </View>
   );
+};
+
+const TotalAmount = () => {
+  const dispatch = useDispatch();
+  const [totalAmount, setTotalAmount] = useState(0);
+  const totalPrice = useSelector((state) => state.cart.totalAmount);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      dispatch({ type: GET_TOTAL_AMOUNT });
+      setTotalAmount(totalPrice);
+      return () => setTotalAmount(0);
+    })
+  );
+  return <Text style={styles.totalPriceText}>${totalAmount}</Text>;
 };
 
 const styles = StyleSheet.create({
