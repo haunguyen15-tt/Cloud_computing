@@ -17,7 +17,7 @@ const Header = ({ navigation }) => {
               color: COLORS.red,
             }}
           >
-            Demons Store
+            Hau Store
           </Text>
         </View>
         <Icon onPress={() => navigation.navigate('Cart')} name='shopping-cart' size={28} />

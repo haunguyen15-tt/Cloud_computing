@@ -376,7 +376,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     paddingBottom: 20,
-    marginTop: -220,
+    marginTop: -200,
   },
   headerText: {
     fontSize: 20,

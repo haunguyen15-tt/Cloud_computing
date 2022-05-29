@@ -2,15 +2,17 @@ import { StyleSheet, Text, View, Dimensions, FlatList, ActivityIndicator } from 
 import { Header, Item, Input } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import DemonsButton from '../../../components/Button';
+import { useFocusEffect } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import ListItem from './ListItem';
 
 var { height, width } = Dimensions.get('window');
 
 import { DUMMY_PRODUCTS } from '../../../assets/data/products';
-import { getAllProducts } from '../../../Service/apis/product';
+import { getAllProducts, deleteProduct } from '../../../Service/apis/product';
 
 const ListHeader = () => {
   return (
@@ -33,17 +35,48 @@ const ListHeader = () => {
 };
 
 const Products = ({ navigation }) => {
-  const [products, setProducts] = useState(DUMMY_PRODUCTS);
-  const [productFilter, setProductFilter] = useState(DUMMY_PRODUCTS);
+  const [products, setProducts] = useState();
+  const [productsFilter, setProductsFilter] = useState();
   const [loading, setLoading] = useState(true);
+  const [token, setToken] = useState();
 
-  useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 2000);
+  // useEffect(() => {
+  //   const timer = setTimeout(() => setLoading(false), 100);
 
-    return () => {
-      clearTimeout(timer);
-    };
-  }, []);
+  //   return () => {
+  //     clearTimeout(timer);
+  //   };
+  // }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      AsyncStorage.getItem('token')
+        .then((res) => {
+          setToken(res);
+        })
+        .catch((error) => console.log(error));
+      const getProducts = async () => {
+        try {
+          const res = await getAllProducts();
+          console.log(res.data);
+          setProducts(res.data.products);
+          setProductsFilter(res.data.products);
+          setLoading(false);
+        } catch (e) {
+          console.log(e.message);
+        }
+      };
+
+      getProducts();
+      // getData();
+
+      return () => {
+        setProducts();
+        setProductsFilter();
+        setLoading(true);
+      };
+    }, [])
+  );
 
   // useEffect(async () => {
   //   const productsData = await getAllProducts();
@@ -56,9 +89,26 @@ const Products = ({ navigation }) => {
 
   const searchProduct = (text) => {
     if (text == '') {
-      setProductFilter(products);
+      setProductsFilter(products);
     }
-    setProductFilter(products.filter((i) => i.name.toLowerCase().includes(text.toLowerCase())));
+    setProductsFilter(products.filter((i) => i.name.toLowerCase().includes(text.toLowerCase())));
+  };
+
+  const deleteProductForm = async (id) => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    try {
+      await deleteProduct(id, config);
+      const products = productsFilter.filter((item) => item._id !== id);
+      setProductsFilter(products);
+    } catch (error) {
+      console.log(error);
+    }
+    console.log(id);
+    console.log(token);
   };
 
   return (
@@ -97,18 +147,13 @@ const Products = ({ navigation }) => {
         </View>
       ) : (
         <FlatList
-          data={productFilter}
+          data={productsFilter}
           contentContainerStyle={{
             paddingBottom: 100,
           }}
           ListHeaderComponent={ListHeader}
           renderItem={({ item, index }) => (
-            <ListItem
-              {...item}
-              navigation={navigation}
-              index={index}
-              // delete={deleteProduct}
-            />
+            <ListItem {...item} navigation={navigation} index={index} delete={deleteProductForm} />
           )}
           keyExtractor={(item) => item.id}
         />

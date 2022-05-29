@@ -31,6 +31,7 @@ const BottomNav = () => {
           backgroundColor: '#ffffff',
           height: 70,
           padding: 10,
+          flexDirection: 'column',
           ...styles.shadow,
         },
         tabBarShowLabel: false,
@@ -43,10 +44,14 @@ const BottomNav = () => {
         component={Home}
         options={{
           tabBarIcon: ({ focused }) => (
-            <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+            <View style={{ alignItems: 'center', justifyContent: 'center', width: 50 }}>
               <Icon color={focused ? '#e32f45' : '#748c94'} name='home-filled' size={28} />
               <Text
-                style={{ color: focused ? '#e32f45' : '#748c94', fontSize: 14, fontWeight: 'bold' }}
+                style={{
+                  color: focused ? '#e32f45' : '#748c94',
+                  fontSize: 12,
+                  fontWeight: 'bold',
+                }}
               >
                 Home
               </Text>
@@ -59,10 +64,10 @@ const BottomNav = () => {
         component={Profile}
         options={{
           tabBarIcon: ({ focused }) => (
-            <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+            <View style={{ alignItems: 'center', justifyContent: 'center', width: 50 }}>
               <Icon color={focused ? '#e32f45' : '#748c94'} name='person' size={28} />
               <Text
-                style={{ color: focused ? '#e32f45' : '#748c94', fontSize: 14, fontWeight: 'bold' }}
+                style={{ color: focused ? '#e32f45' : '#748c94', fontSize: 12, fontWeight: 'bold' }}
               >
                 Profile
               </Text>
@@ -89,10 +94,10 @@ const BottomNav = () => {
         component={Home}
         options={{
           tabBarIcon: ({ focused }) => (
-            <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+            <View style={{ alignItems: 'center', justifyContent: 'center', width: 50 }}>
               <Icon color={focused ? '#e32f45' : '#748c94'} name='favorite' size={28} />
               <Text
-                style={{ color: focused ? '#e32f45' : '#748c94', fontSize: 14, fontWeight: 'bold' }}
+                style={{ color: focused ? '#e32f45' : '#748c94', fontSize: 12, fontWeight: 'bold' }}
               >
                 Favorite
               </Text>
@@ -105,10 +110,10 @@ const BottomNav = () => {
         component={Cart}
         options={{
           tabBarIcon: ({ focused }) => (
-            <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+            <View style={{ alignItems: 'center', justifyContent: 'center', width: 50 }}>
               <Icon color={focused ? '#e32f45' : '#748c94'} name='shopping-cart' size={28} />
               <Text
-                style={{ color: focused ? '#e32f45' : '#748c94', fontSize: 14, fontWeight: 'bold' }}
+                style={{ color: focused ? '#e32f45' : '#748c94', fontSize: 12, fontWeight: 'bold' }}
               >
                 Cart
               </Text>

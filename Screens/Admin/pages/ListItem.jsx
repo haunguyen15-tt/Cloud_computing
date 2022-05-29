@@ -15,7 +15,7 @@ import DemonsButton from '../../../components/Button';
 
 var { width } = Dimensions.get('window');
 
-const ListItem = ({ image, name, category, price, quantity, index }) => {
+const ListItem = ({ navigation, ...props }) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   return (
@@ -47,43 +47,50 @@ const ListItem = ({ image, name, category, price, quantity, index }) => {
             <DemonsButton
               medium
               secondary
-              onPress={() => [
-                // props.navigation.navigate('ProductForm', { item: props }),
-                setModalVisible(false),
-              ]}
+              onPress={() => [navigation.navigate('ProductForm', props), setModalVisible(false)]}
             >
               <Text style={styles.textStyle}>Edit</Text>
             </DemonsButton>
-            <DemonsButton medium danger onPress={() => [setModalVisible(false)]}>
+            <DemonsButton
+              medium
+              danger
+              onPress={() => [props.delete(props._id), setModalVisible(false)]}
+            >
               <Text style={styles.textStyle}>Delete</Text>
             </DemonsButton>
           </View>
         </View>
       </Modal>
       <TouchableOpacity
-        style={[styles.container, { backgroundColor: index % 2 == 0 ? 'white' : 'lightgray' }]}
-        onLongPress={() => setModalVisible(true)}
+        style={[
+          styles.container,
+          { backgroundColor: props.index % 2 == 0 ? 'white' : 'lightgray' },
+        ]}
+        // onPress={() => {
+        //   props.navigation.navigate('Detail', props);
+        // }}
+        onPress={() => setModalVisible(true)}
       >
         <Image
           source={{
-            uri: image
-              ? image
+            uri: props.imageCover
+              ? props.imageCover
               : 'https://cdn.pixabay.com/photo/2019/07/26/20/52/man-4365597_960_720.png',
           }}
           resizeMode='contain'
           style={styles.image}
         />
         <Text numberOfLines={1} ellipsizeMode='tail' style={styles.item}>
-          {name}
+          {props.name}
         </Text>
         <Text numberOfLines={1} ellipsizeMode='tail' style={styles.item}>
-          {category.name}
+          {props.category?.name}
         </Text>
         <Text numberOfLines={1} ellipsizeMode='tail' style={styles.item}>
-          {price}
+          {props.price}
         </Text>
         <Text numberOfLines={1} ellipsizeMode='tail' style={styles.item}>
-          {quantity}
+          {props.quantity}
         </Text>
       </TouchableOpacity>
     </View>
