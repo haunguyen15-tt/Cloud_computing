@@ -48,6 +48,12 @@ const userSchema = new mongoose.Schema({
   numberPhone: {
     type: String,
     required: [true, 'Please enter a phone number'],
+    validate: {
+      validator: function (el) {
+        return validator.isMobilePhone(el, ['vi-VN']);
+      },
+      message: 'Please enter a valid number phone',
+    },
   },
   address: {
     type: String,

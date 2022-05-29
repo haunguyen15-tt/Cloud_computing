@@ -79,8 +79,6 @@ exports.addNewProduct = catchAsync(async (req, res, next) => {
 
   const newProduct = await Product.create(req.body);
 
-  console.log(req.file);
-
   res.status(201).json({
     status: 'success',
     data: {
@@ -106,27 +104,43 @@ exports.getProduct = catchAsync(async (req, res, next) => {
 });
 
 exports.updateProduct = catchAsync(async (req, res, next) => {
-  const product = await Product.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-    runValidators: true,
-  });
+  const product = await Product.findById(req.params.id);
 
   if (!product) {
     return next(new AppError('No product found with that ID', 404));
   }
 
+  const { file } = req;
+  let imagepath;
+
+  if (file) {
+    const fileName = file.filename;
+    const basePath = `${req.protocol}://${req.get('host')}/img/products/`;
+    imagepath = `${basePath}${fileName}`;
+  } else {
+    imagepath = product.imageCover;
+  }
+  req.body.imageCover = imagepath;
+
+  const updatedProduct = await Product.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    {
+      new: true,
+      runValidators: true,
+    }
+  );
+
   res.status(200).json({
     status: 'success',
     data: {
-      product,
+      updatedProduct,
     },
   });
 });
 
 exports.deleteProduct = catchAsync(async (req, res, next) => {
-  const product = await Product.findByIdAndUpdate(req.params.id, {
-    active: false,
-  });
+  const product = await Product.findByIdAndDelete(req.params.id);
 
   if (!product) {
     return next(new AppError('No product found with that ID', 404));

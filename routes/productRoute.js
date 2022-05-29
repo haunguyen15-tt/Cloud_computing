@@ -33,6 +33,6 @@ router
     authController.restrictTo('admin'),
     productController.deleteProduct
   )
-  .patch(productController.updateProduct);
+  .patch(productController.uploadImageCover, productController.updateProduct);
 
 module.exports = router;
