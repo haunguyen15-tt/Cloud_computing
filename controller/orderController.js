@@ -36,8 +36,6 @@ exports.getAllOrders = catchAsync(async (req, res, next) => {
 exports.getOrdersByUser = catchAsync(async (req, res, next) => {
   const orders = await Order.find({ user: req.params.id });
 
-  console.log(orders);
-
   if (!orders) {
     return next(new AppError('No orders found with that user', 404));
   }
@@ -46,6 +44,24 @@ exports.getOrdersByUser = catchAsync(async (req, res, next) => {
     status: 'success',
     data: {
       orders,
+    },
+  });
+});
+
+exports.updateOrder = catchAsync(async (req, res, next) => {
+  const order = await Order.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+  });
+
+  if (!order) {
+    return next(new AppError('No order found with that ID', 404));
+  }
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      order,
     },
   });
 });

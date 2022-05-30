@@ -12,7 +12,13 @@ const productSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
-    comment: [String],
+    comment: [
+      {
+        nameUser: String,
+        emailUser: String,
+        comment: String,
+      },
+    ],
     price: {
       type: Number,
       required: [true, 'A product must have a price'],

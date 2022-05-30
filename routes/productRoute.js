@@ -35,4 +35,9 @@ router
   )
   .patch(productController.uploadImageCover, productController.updateProduct);
 
+router
+  .route('/comments/:id')
+  .post(productController.createComment)
+  .get(productController.getAllComments);
+
 module.exports = router;

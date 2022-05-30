@@ -111,6 +111,7 @@ exports.updateProduct = catchAsync(async (req, res, next) => {
   }
 
   const { file } = req;
+  console.log(file);
   let imagepath;
 
   if (file) {
@@ -178,6 +179,41 @@ exports.getProductStats = catchAsync(async (req, res, next) => {
     status: 'success',
     data: {
       stats,
+    },
+  });
+});
+
+exports.createComment = catchAsync(async (req, res, next) => {
+  const product = await Product.findById(req.params.id);
+  const comment = {
+    nameUser: req.body.nameUser,
+    emailUser: req.body.emailUser,
+    comment: req.body.comment,
+  };
+
+  if (!product) {
+    return next(new AppError('No product found with that ID', 404));
+  }
+
+  product.comment.push(comment);
+  product.save();
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      comment,
+    },
+  });
+});
+
+exports.getAllComments = catchAsync(async (req, res, next) => {
+  const product = await Product.findById(req.params.id);
+  const comments = product.comment;
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      comments,
     },
   });
 });
