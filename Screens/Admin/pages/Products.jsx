@@ -11,7 +11,6 @@ import ListItem from './ListItem';
 
 var { height, width } = Dimensions.get('window');
 
-import { DUMMY_PRODUCTS } from '../../../assets/data/products';
 import { getAllProducts, deleteProduct } from '../../../Service/apis/product';
 
 const ListHeader = () => {

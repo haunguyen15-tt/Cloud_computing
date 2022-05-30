@@ -39,3 +39,22 @@ export const deleteProduct = async (id, config) => {
     ...config,
   });
 };
+
+export const getAllComments = async () => {
+  const comments = await request({
+    url: '/api/v1/products/comments',
+    method: 'GET',
+  });
+
+  return comments.data;
+};
+
+export const createdComment = async (id, data) => {
+  const comment = await request({
+    url: `/api/v1/products/comments/${id}`,
+    method: 'post',
+    data: JSON.stringify(data),
+  });
+
+  return comment.data;
+};

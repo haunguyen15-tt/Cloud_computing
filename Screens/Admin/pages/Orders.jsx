@@ -3,6 +3,7 @@ import { View, FlatList, Text } from 'react-native';
 // import axios from 'axios';
 // import baseURL from '../../assets/common/baseUrl';
 import { useFocusEffect } from '@react-navigation/native';
+import { getAllOrders } from '../../../Service/apis/order';
 
 import OrderCard from './OrderCard';
 
@@ -15,25 +16,31 @@ const orderList1 = [
 ];
 
 const Orders = (props) => {
-  const [orderList, setOrderList] = useState(orderList1);
+  const [orderList, setOrderList] = useState();
 
-  // useFocusEffect(
-  //   useCallback(() => {
-  //     getOrders();
-  //     return () => {
-  //       setOrderList();
-  //     };
-  //   }, [])
-  // );
+  useFocusEffect(
+    useCallback(() => {
+      async function fetchOrders() {
+        await getOrders();
+      }
 
-  // const getOrders = () => {
-  //   axios
-  //     .get(`${baseURL}orders`)
-  //     .then((x) => {
-  //       setOrderList(x.data);
-  //     })
-  //     .catch((error) => console.log(error));
-  // };
+      fetchOrders();
+
+      return () => {
+        setOrderList();
+      };
+    }, [])
+  );
+
+  const getOrders = async () => {
+    try {
+      const res = await getAllOrders();
+      console.log(res.data.orders);
+      setOrderList(res.data.orders);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <View style={{ paddingBottom: 100 }}>

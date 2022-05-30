@@ -2,7 +2,7 @@ import axios from 'axios';
 import queryString from 'query-string';
 
 const request = axios.create({
-  baseURL: 'http://172.20.0.192:3000/',
+  baseURL: 'http://192.168.1.186:3000/',
   headers: {
     'Content-Type': 'application/json',
   },

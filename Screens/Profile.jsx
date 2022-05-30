@@ -204,12 +204,6 @@ const Profile = ({ navigation }) => {
       {user ? (
         <View style={styles.container}>
           <View style={styles.contentTop}></View>
-          <View style={styles.avatarWrapped}>
-            <Image source={{ uri: image }} style={styles.avatar} />
-            <TouchableOpacity style={styles.avatarPicker} onPress={pickImage}>
-              <MaterialCommunityIcons color={'#fff'} name='camera-outline' size={24} colo />
-            </TouchableOpacity>
-          </View>
           <View style={styles.contentBot}>
             <View style={styles.botContent}>
               <View style={styles.header}>
@@ -242,13 +236,19 @@ const Profile = ({ navigation }) => {
                   showsVerticalScrollIndicator={false}
                   contentContainerStyle={{
                     marginTop: 10,
-                    paddingBottom: 100,
+                    paddingBottom: 180,
                   }}
                   data={OrderItems}
-                  renderItem={({ item }) => <OrderCard orderItem={item} />}
+                  renderItem={({ item }) => <OrderCard orderItem={item} key={item._id} />}
                   keyExtractor={(item) => item._id}
                 />
               </View>
+            </View>
+            <View style={styles.avatarWrapped}>
+              <Image source={{ uri: image }} style={styles.avatar} />
+              <TouchableOpacity style={styles.avatarPicker} onPress={pickImage}>
+                <MaterialCommunityIcons color={'#fff'} name='camera-outline' size={24} colo />
+              </TouchableOpacity>
             </View>
           </View>
         </View>
@@ -313,7 +313,7 @@ const OrderCard = ({ orderItem }) => {
           Products:
         </Text>
         {orderItem.product.map((item) => (
-          <View style={{ flexDirection: 'row' }}>
+          <View style={{ flexDirection: 'row' }} key={item._id}>
             <Text
               style={[
                 styles.textOrderProduct,
@@ -350,7 +350,7 @@ const styles = StyleSheet.create({
   },
   contentTop: {
     width: '100%',
-    height: '15%',
+    height: '5%',
     backgroundColor: '#000',
     display: 'flex',
     justifyContent: 'center',
@@ -358,12 +358,12 @@ const styles = StyleSheet.create({
   },
   contentBot: {
     width: '100%',
-    height: '85%',
+    height: '95%',
     backgroundColor: '#fff',
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     paddingTop: 200,
-    marginTop: 50,
+    marginTop: 150,
   },
   botContent: {
     width: '100%',
@@ -376,7 +376,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     paddingBottom: 20,
-    marginTop: -200,
+    marginTop: -150,
   },
   headerText: {
     fontSize: 20,
@@ -388,7 +388,9 @@ const styles = StyleSheet.create({
     position: 'absolute',
     backgroundColor: '#fff',
     borderRadius: 20,
-    top: 50,
+    top: -60,
+    left: '50%',
+    transform: [{ translateX: -50 }],
     padding: 10,
     shadowColor: '#000',
     shadowOffset: {

@@ -25,7 +25,7 @@ const BottomNav = () => {
           position: 'absolute',
           borderRadius: 15,
           elevation: 0,
-          bottom: 25,
+          bottom: 4,
           left: 20,
           right: 20,
           backgroundColor: '#ffffff',
@@ -37,6 +37,7 @@ const BottomNav = () => {
         tabBarShowLabel: false,
         tabBarActiveTintColor: COLORS.red,
         headerShown: false,
+        tabBarHideOnKeyboard: 'true',
       }}
     >
       <Tab.Screen

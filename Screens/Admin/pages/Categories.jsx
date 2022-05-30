@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, Dimensions, TextInput, StyleSheet } from 'react-native';
 import DemonsButton from '../../../components/Button';
 
+import { getAllCategories, addCategory, deleteCategory } from '../../../Service/apis/categories';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 var { width } = Dimensions.get('window');
 
 const Item = ({ item, onDelete }) => {
@@ -15,74 +18,74 @@ const Item = ({ item, onDelete }) => {
   );
 };
 
-const categories1 = [
-  { _id: '123123', name: 'T-Shirt' },
-  { _id: '321321', name: 'Pant' },
-  { _id: '333', name: 'Blazer' },
-  { _id: '222', name: 'Others' },
-];
-
 const Categories = (props) => {
-  const [categories, setCategories] = useState(categories1);
+  const [categories, setCategories] = useState([]);
   const [categoryName, setCategoryName] = useState();
-  // const [token, setToken] = useState();
+  const [token, setToken] = useState();
 
-  // useEffect(() => {
-  //   AsyncStorage.getItem('jwt')
-  //     .then((res) => {
-  //       setToken(res);
-  //     })
-  //     .catch((error) => console.log(error));
+  useEffect(async () => {
+    AsyncStorage.getItem('token')
+      .then((res) => {
+        setToken(res);
+      })
+      .catch((error) => console.log(error));
 
-  //   axios
-  //     .get(`${baseURL}categories`)
-  //     .then((res) => setCategories(res.data))
-  //     .catch((error) => alert('Error to load categories'));
+    try {
+      const res = await getAllCategories();
+      setCategories(res.data.categorys);
+    } catch (err) {
+      console.log(err);
+    }
 
-  //   return () => {
-  //     setCategories();
-  //     setToken();
-  //   };
-  // }, []);
+    return () => {
+      setCategories();
+      setToken();
+    };
+  }, []);
 
-  const addCategory = () => {
-    // const category = {
-    //   name: categoryName,
-    // };
-    // const config = {
-    //   headers: {
-    //     Authorization: `Bearer ${token}`,
-    //   },
-    // };
-    // axios
-    //   .post(`${baseURL}categories`, category, config)
-    //   .then((res) => setCategories([...categories, res.data]))
-    //   .catch((error) => alert('Error to load categories'));
-    // setCategoryName('');
+  const addCategoryForm = async () => {
+    const category = {
+      name: categoryName,
+    };
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    try {
+      const res = await addCategory(category, config);
+      setCategories((prev) => [...prev, res.data.category]);
+    } catch (error) {
+      console.log(error);
+    }
+
+    setCategoryName('');
   };
 
-  const deleteCategory = (id) => {
-    // const config = {
-    //   headers: {
-    //     Authorization: `Bearer ${token}`,
-    //   },
-    // };
-    // axios
-    //   .delete(`${baseURL}categories/${id}`, config)
-    //   .then((res) => {
-    //     const newCategories = categories.filter((item) => item.id !== id);
-    //     setCategories(newCategories);
-    //   })
-    //   .catch((error) => alert('Error to load categories'));
+  const deleteCategoryForm = async (id) => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    try {
+      const res = await deleteCategory(id, config);
+      const newCategories = categories.filter((item) => item._id !== id);
+      setCategories(newCategories);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <View style={{ position: 'relative', height: '100%' }}>
-      <View style={{ marginBottom: 60 }}>
+      <View style={{ marginBottom: 160 }}>
         <FlatList
           data={categories}
           renderItem={({ item, index }) => (
-            <Item item={item} index={index} onDelete={deleteCategory} />
+            <Item item={item} index={index} onDelete={deleteCategoryForm} />
           )}
           keyExtractor={(item) => item._id}
         />
@@ -99,7 +102,7 @@ const Categories = (props) => {
           />
         </View>
         <View>
-          <DemonsButton medium secondary onPress={() => addCategory()}>
+          <DemonsButton medium secondary onPress={() => addCategoryForm()}>
             <Text style={{ color: 'white', fontWeight: 'bold' }}>Submit</Text>
           </DemonsButton>
         </View>
@@ -118,7 +121,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-around',
     position: 'absolute',
-    bottom: 120,
+    bottom: 80,
     left: 0,
   },
   input: {

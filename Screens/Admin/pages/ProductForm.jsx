@@ -1,5 +1,5 @@
 import { View, Text, Image, StyleSheet, TouchableOpacity, Platform } from 'react-native';
-import { Item, Picker } from 'native-base';
+import { Picker } from '@react-native-picker/picker';
 import React, { useState, useEffect } from 'react';
 import FormContainer from '../../../components/Form/FormContainer';
 import Input from '../../../components/Form/Input';
@@ -12,7 +12,6 @@ import * as ImagePicker from 'expo-image-picker';
 import DemonsButton from '../../../components/Button';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import mime from 'mime';
-import axios from 'axios';
 
 const ProductForm = (props) => {
   const [pickerValue, setPickerValue] = useState();
@@ -38,6 +37,7 @@ const ProductForm = (props) => {
       setImage(props.route.params.imageCover);
       setCategory(props.route.params.category?._id);
       setQuantity(props.route.params.quantity.toString());
+      setPickerValue(props.route.params.category.name);
     }
 
     // setToken(tokenredux);
@@ -85,12 +85,14 @@ const ProductForm = (props) => {
     }
     let formData = new FormData();
 
-    const newImageUri = 'file:///' + image.split('file:/').join('');
-    formData.append('imageCover', {
-      uri: newImageUri,
-      type: mime.getType(newImageUri),
-      name: newImageUri.split('/').pop(),
-    });
+    const newImageUri = 'file:///' + image?.split('file:/').join('');
+    if (!props.route.params) {
+      formData.append('imageCover', {
+        uri: newImageUri,
+        type: mime.getType(newImageUri),
+        name: newImageUri.split('/').pop(),
+      });
+    }
     formData.append('name', name);
     formData.append('price', price);
     formData.append('description', description);
@@ -106,10 +108,11 @@ const ProductForm = (props) => {
 
     if (item !== null) {
       try {
-        const product = await addProduct(formData, config);
+        const product = await updateProduct(item._id, formData, config);
         if (product) {
           Toast.show({
             topOffset: 60,
+            visibilityTime: 1000,
             type: 'success',
             text1: 'Product successfuly updated',
           });
@@ -120,34 +123,14 @@ const ProductForm = (props) => {
       } catch (error) {
         Toast.show({
           topOffset: 60,
+          visibilityTime: 1000,
           type: 'error',
           text1: 'Something went wrong',
           text2: 'Please try again',
         });
+
+        console.log(error);
       }
-      // axios
-      //   .patch(`http://192.168.1.186:3000/api/v1/products/${item._id}`, formData, config)
-      //   .then((res) => {
-      //     if (res.status == 200 || res.status == 201) {
-      //       Toast.show({
-      //         topOffset: 60,
-      //         type: 'success',
-      //         text1: 'Product successfuly updated',
-      //       });
-      //       setTimeout(() => {
-      //         props.navigation.navigate('Products');
-      //       }, 500);
-      //     }
-      //   })
-      //   .catch((error) => {
-      //     Toast.show({
-      //       topOffset: 60,
-      //       type: 'error',
-      //       text1: 'Something went wrong',
-      //       text2: 'Please try again',
-      //     });
-      //     console.log(error);
-      //   });
     } else {
       try {
         const product = await addProduct(formData, config);
@@ -166,37 +149,13 @@ const ProductForm = (props) => {
           topOffset: 60,
           type: 'error',
           text1: 'Something went wrong',
-          text2: error.response.data.message.includes('duplicate')
+          text2: error.response.data?.message.includes('duplicate')
             ? 'Duplicate name of product'
             : 'Please try again later',
         });
+        console.log(error);
       }
     }
-
-    // axios
-    //   .post(`http://192.168.1.186:3000/api/v1/products`, formData, config)
-    //   .then((res) => {
-    //     if (res.status == 200 || res.status == 201) {
-    //       Toast.show({
-    //         topOffset: 60,
-    //         type: 'success',
-    //         text1: 'New Product added',
-    //       });
-    //       setTimeout(() => {
-    //         props.navigation.navigate('Products');
-    //       }, 500);
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     Toast.show({
-    //       topOffset: 60,
-    //       type: 'error',
-    //       text1: 'Something went wrong',
-    //       text2: error.response.data.message.includes('duplicate')
-    //         ? 'Duplicate name of product'
-    //         : 'Please try again later',
-    //     });
-    //   });
   };
 
   return (
@@ -261,24 +220,30 @@ const ProductForm = (props) => {
           Categories
         </Text>
       </View>
-      <Item picker style={{ paddingLeft: 40, paddingTop: 10 }}>
+      <View>
         <Picker
           mode='dropdown'
-          iosIcon={<Icon color={'#007aff'} name='arrow-down' />}
+          style={{ width: undefined }}
           selectedValue={pickerValue}
-          onValueChange={(e) => [setPickerValue(e._id), setCategory(e._id)]}
+          placeholder='Change Status'
+          placeholderIconColor={{ color: '#007aff' }}
+          onValueChange={(e) => {
+            setPickerValue(e);
+            const cate = categories.filter((item) => item.name === e);
+            setCategory(cate[0]._id);
+          }}
         >
-          {categories?.map((c, index) => {
-            return <Picker.Item key={index} label={c.name} value={c} />;
+          {categories.map((c) => {
+            return <Picker.Item key={c._id} label={c.name} value={c.name} />;
           })}
         </Picker>
-      </Item>
-      {err ? <Error message={err} /> : null}
-      <View style={styles.buttonContainer}>
-        <DemonsButton large secondary onPress={() => addProductForm()}>
-          <Text style={styles.buttonText}>Confirm</Text>
-        </DemonsButton>
+        <View style={styles.buttonContainer}>
+          <DemonsButton large secondary onPress={() => addProductForm()}>
+            <Text style={styles.buttonText}>Confirm</Text>
+          </DemonsButton>
+        </View>
       </View>
+      {err ? <Error message={err} /> : null}
     </FormContainer>
   );
 };
