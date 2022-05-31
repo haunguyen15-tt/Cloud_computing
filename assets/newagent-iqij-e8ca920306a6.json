@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "newagent-iqij",
+  "private_key_id": "e8ca920306a658d67e946621c5af4868cece7735",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDfVw9aXPOMgdAi\n2U20IdbiPCwu15fAv/jl4J9ugEPYhF7CgFA8pilzdLcn+zQxQ496fFpErHptl/us\nGWGOgQ09lvFhb5rYklDpSU8f6rCviyD8/GScKbdtf4C+X6xMX763aFrjNYCxhbQp\n0I3a2ZAFUTzGHKzPSPQGsgr6FXdCrMaBxERNVwDL+ElrCAaG6dqh7XWUz0/IE28K\nyUwdqo/Jo83OBK3Uu2N6BNH9djPgjzPwd3dw2OQJeqm6/7z5BFN+n0KM+Oco/WRr\nJgbkh7XDco83AuO7YrLQ2L5QkQqN49/XLaxDW0DgwI5bqLMTxnmH9kE3Xrp1vQRq\njBTo4439AgMBAAECggEABm2CLsbDvan+HFqmXrD7TGnl7aKH0WTVBtdW+f5YCt24\nanRN8DOUuCgbngYf+Oupr/aZ6dBlpPd9p0ottsURD/zi9+ZsjZ9xvl0SmWe5lmZ0\ngxjH09TBh4sRYKlD6LN4EN2V1rnd+SimHZlNKTIfb9US4N1yEx8q4sccrhjlufX4\nPtDws3pIXJrCT5K5ostsZLn6N8X21r7rV4ZLcCXO0qDsMzG1dZCDB/gUFpPXe77Y\ndfYM64H6ErgihsKBTdMMZgzuBqN1PiCaZjpK8UcQ1LrvLgi0HD7mLVb3y5OysqMp\n9iWICK3W/jk5uhHqngal/brzEVOdo7Tf+ydUQ45NMwKBgQD5G5wffhbq537N6G3B\nUpagZntovznJpteyeIVBlZ3eDRPJwngyqKJuUQbJrGyTHj6BV8A5mLIJO3lVW15G\nqHNEdiPV762ndMhY3qe7TH0JRbF6tNNHrfIwyFAFZmmhKw9v4T2PuKwiLPuo2iR8\nQZIDWuVANgBGa1rwTfuq4Qfm/wKBgQDlhPDyVLzzoyERsKdcrqC/BM+j3LrscB9V\n5yp2SEVLrhMU4bw2gOgslXHAvuTWlbUg95vRkrhF6Q3Zzjg+duI8vIWjde+VLS6G\n1Suu+vYkV2vP0DiX1ExHo6Ad173TV34xfCvCwPIq10ymoAj+4zmYH67VlMOYe/Xb\njjypEWUnAwKBgQCQnxbksa9ccUmNAYO22NvaA6ViCqLiD5rqYk365YHhiHYUjHJ7\n9qtWoHPwYconH0fqj6dpyNyTv5ORmpoBK4rAFFZ5vcxzi7lE3v9CHgX5fBytwI1o\n7/PLnn/Wor5wcy9jJME4z14f+T2hqgPEn8zFZd/yh2dherIxERUq/7o2wQKBgQDZ\n/YLvVoZEDMrqx1Kd14n7AzHHW2z6BZ/tcepFf2y5bXLYIXImfhaFycbJn0Uvfe8T\nibknumdklu490Pxgb39+2js/PlM35zrKewrLXbaMW6+dKBGoOs3cOM9pqK+1W+MS\nUvIpPiKDiAtYMqV4mQ3pqyXd2zZOzGV9i0GX/lqJSwKBgFkcygi7Ps4vEGlA3tw3\nz/CzbTeRAWyuj/VoZDsqkppWwcuLASZw9pPLMjvff5wXHc5qyEEKOw/PMqUK5Tdt\nDBtvmZ3lsvGL277IW1AiMY0FVU9qtwn19UvHYXdsUvnGXyUOu2/Fy+r6F/ZWgk0R\nnS5eguNkvm78qWaWmy0NA72K\n-----END PRIVATE KEY-----\n",
+  "client_email": "demons-chatbot-615@newagent-iqij.iam.gserviceaccount.com",
+  "client_id": "101063189278718132265",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/demons-chatbot-615%40newagent-iqij.iam.gserviceaccount.com"
+}

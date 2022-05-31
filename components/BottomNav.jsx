@@ -10,6 +10,7 @@ import Cart from '../Screens/Cart';
 import Profile from '../Screens/Profile';
 
 import Container from '../Screens/Admin/Container';
+import MessageNavigator from '../Navigations/MessageNavigation';
 
 import COLORS from '../assets/data/colors';
 
@@ -91,12 +92,12 @@ const BottomNav = () => {
         />
       )}
       <Tab.Screen
-        name='Favorite'
-        component={Home}
+        name='MessageCustomer'
+        component={MessageNavigator}
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={{ alignItems: 'center', justifyContent: 'center', width: 50 }}>
-              <Icon color={focused ? '#e32f45' : '#748c94'} name='favorite' size={28} />
+              <Icon color={focused ? '#e32f45' : '#748c94'} name='message' size={28} />
               <Text
                 style={{ color: focused ? '#e32f45' : '#748c94', fontSize: 12, fontWeight: 'bold' }}
               >
